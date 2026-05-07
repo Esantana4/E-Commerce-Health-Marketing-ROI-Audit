@@ -7,53 +7,52 @@ Tools Used: BigQuery SQL, Excel, Power BI
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Project Overview
-This project performs a comprehensive "Health Check" on campaign finance and e-commerce data to evaluate marketing efficiency and organizational risk. By transforming raw transactional data into actionable business intelligence, the audit identifies where capital is concentrated and where data integrity is failing.
-
+This project evaluates the "health" of an e-commerce website by analyzing user behavior across different devices (Mobile, Desktop, Tablet) and marketing channels. The goal is to identify where customers "click away" and which platforms/tiers drive the most revenue.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Key Insights & Analytics
-1. Concentration Risk (Lender Dependency)
-The Business Question: Are we funded by a diverse group, or are we dependent on a few sources?
+1. Funnel Performance (The Drop-Off)
+The Question: Where are we losing the most customers in the checkout process?
 
-Technical Approach: Analyzed lender distribution to identify "Single Points of Failure" in fundraising.
+Findings: There is a 52.3% drop-off between the checkout and purchase stages.
 
-Actionable Insight: The data revealed that 49% of total capital was concentrated among just three lenders; therefore, a diversification strategy is required to mitigate the risk of losing major backers.
+Actionable Recommendation: Investigate shipping costs and checkout speed. A "guest checkout" option or a last-minute discount may prevent this high abandonment rate.
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
-2. Cash Flow Velocity (Cumulative Debt)
-The Business Question: How fast is our debt "snowballing" over time?
+2. High-Value Channel Analysis
+The Question: Which channel brings in "Big Spenders" regardless of total traffic?
 
-Technical Approach: Created a time-series growth model using SQL window functions (SUM OVER) to track the velocity of borrowing.  
+Findings: The Direct channel has the highest Average Conversion Value, meaning these users spend more per transaction than those coming from social media or ads.
 
-Actionable Insight: Borrowing accelerates drastically during election cycles (October/November); therefore, a cash reserve should be established six months prior to these "high-velocity" windows to reduce reliance on high-interest loans.
+----
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. User Tier Monetization
+The Question: Are "Premium" members our top spenders?
 
-3. Compliance & Data Integrity Audit
-The Business Question: Are our records legally compliant and complete?
+Findings: Surprisingly, Free users are the top spenders; there are zero Premium users in the Top 15.
 
-Technical Approach: Performed a data health check to identify missing regulatory information, specifically in the "Occupation" fields.
+Actionable Recommendation: Target the top 15 "Free" users with a trial or incentive to convert them into the Premium tier, as they already demonstrate high loyalty.
 
-Actionable Insight: Identified a specific segment of records missing mandatory job titles; therefore, a targeted "To-Do" list was generated to fix these entries before regulatory filing deadlines.
+----
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Platform Prioritization (Mobile vs. Tablet)
+The Question: Should we prioritize a Tablet-specific UI update?
 
-4. Operational Accuracy (The Correction Ratio)
-The Business Question: Is our data entry team getting more accurate over time?
+Findings: While Tablets have the highest conversion rate (5.11%), they only represent 10% of traffic. Mobile drives the most volume and the highest revenue per hour.
 
-Technical Approach: Analyzed the Correction field (New vs. Modify flags) to measure the ratio of errors year-over-year.
-
-Actionable Insight: The "Modification Rate" peaked between 2014–2016 and has since stabilized; therefore, early errors were used to create a "Lessons Learned" training guide for new staff to ensure future filing accuracy.
+Actionable Recommendation: Prioritize the Mobile UI update first to maximize the impact on total revenue.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-🛠️ Technical Skills Demonstrated
-SQL (BigQuery): CTEs, Window Functions, EXTRACT for time-series, and SAFE_DIVIDE for ratios.
+Technical Skills Demonstrated
+Funnel Analysis: Built logic to track user progression, identifying a 52.3% drop-off at the checkout phase.
 
-Data Modeling: Transforming raw transaction logs into executive-level summaries.
+Performance Benchmarking: Compared Conversion Rates and Revenue-Per-Hour across Mobile, Tablet, and Desktop.
 
-Business Intelligence: Translating technical findings into "Stakeholder-ready" insights.
+User Segmentation: Ranked top spenders using SQL window functions, discovering that Free users outpaced Premium members.
 
-Documentation: Writing technical summaries that bridge the gap between IT and Management.
+Marketing ROI: Calculated Average Conversion Value by channel to identify that "Direct" traffic provides the highest quality leads
+
+Data Transformation: Extracted and cleaned raw data in BigQuery to create stakeholder-ready insights for Power BI.
 

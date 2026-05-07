@@ -3,7 +3,7 @@
 
 Calculates the 52.3% drop-off between checkout and purchase to identify where customers click away.
 
-SQL:
+- SQL:
 
 SELECT
   event_type,
@@ -27,7 +27,7 @@ Last thing to look at is the shipping speed. Is it too slow?
 
 Aggregates data to show which ads are working and proves Direct traffic brings in "Big Spenders"
 
-SQL:
+- SQL:
 
 SELECT
   channel,

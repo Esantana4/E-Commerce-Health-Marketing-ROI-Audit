@@ -22,7 +22,6 @@ Findings: There is a 52.3% drop-off between the checkout and purchase stages.
 
 Actionable Recommendation: Investigate shipping costs and checkout speed. A "guest checkout" option or a last-minute discount may prevent this high abandonment rate.
 
-----
 
 2. High-Value Channel Analysis
 
@@ -30,7 +29,6 @@ The Question: Which channel brings in "Big Spenders" regardless of total traffic
 
 Findings: The Direct channel has the highest Average Conversion Value, meaning these users spend more per transaction than those coming from social media or ads.
 
-----
 
 3. User Tier Monetization
 
@@ -40,7 +38,6 @@ Findings: Surprisingly, Free users are the top spenders; there are zero Premium 
 
 Actionable Recommendation: Target the top 15 "Free" users with a trial or incentive to convert them into the Premium tier, as they already demonstrate high loyalty.
 
-----
 
 4. Platform Prioritization (Mobile vs. Tablet)
 

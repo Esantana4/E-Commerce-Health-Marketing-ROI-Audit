@@ -7,6 +7,7 @@ Tools Used: BigQuery SQL, Excel, Power BI
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Project Overview
+
 This project evaluates the "health" of an e-commerce website by analyzing user behavior across different devices (Mobile, Desktop, Tablet) and marketing channels. The goal is to identify where customers "click away" and which platforms/tiers drive the most revenue.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

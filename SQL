@@ -1,1 +1,103 @@
 
+1. Conversion Funnel
+
+Calculates the 52.3% drop-off between checkout and purchase to identify where customers click away.
+
+SQL:
+
+SELECT
+  event_type,
+  COUNT(event_type) AS event,
+  ROUND(SAFE_DIVIDE(COUNT(event_type), (SELECT COUNT(*) FROM `fluted-box-488519-p3.sql_practice.product_analyst_sql`))*100, 2) as percent_of_total
+FROM `fluted-box-488519-p3.sql_practice.product_analyst_sql`
+GROUP BY event_type;
+
+- Answers:
+
+We are losing 523 people from checkout to purchase. That is a 52.3 percent drop off.
+Reasons for drop offs could be the checkout process is not simple/fast enough or customers lose interest in the website/product.
+Another reason could be that a customer was highly motivated to purchase the product but the customer did not like the total price or shipping cost/speed.
+Maybe a discount at checkout could incentivize customers to follow through with a purchase.
+Is the "Guest Checkout" option hidden? Are we asking for too much info?
+Last thing to look at is the shipping speed. Is it too slow?
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Channel Spend vs. Value
+
+Aggregates data to show which ads are working and proves Direct traffic brings in "Big Spenders"
+
+SQL:
+
+SELECT
+  channel,
+  ROUND(AVG(conversion_value),2) AS avg_conversion_value,
+  ROUND(SUM(conversion_value),2) AS total_revenue,
+  COUNT(event_type) AS total_purchases
+FROM `fluted-box-488519-p3.sql_practice.product_analyst_sql`
+WHERE conversion_value > 0 AND event_type = 'purchase'
+GROUP BY channel
+ORDER BY avg_conversion_value DESC;
+
+- Answer:
+
+Direct is bringing in the Big Spenders, because it has the best Average Conversion Value.
+
+Channel	        avg_conversion_value	      total_revenue	        total_purchases
+Direct	            =         263.11	            31310.06	                  119
+Google Ads	        =         255.58	            31436.78	                  123
+Organic Search	    =         253.79	            30961.79	                  122
+Social Media	      =         248.60              28091.77	                  113
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Top User Segmentation
+
+Identifies the Top 10 users and compares "Free" vs. "Premium" spending habits.
+
+- SQL:
+
+SELECT 
+  user_id,
+  user_tier,
+  -- We sum the value ONLY if it was a purchase, otherwise we add 0
+  ROUND(SUM(CASE WHEN event_type = 'purchase' THEN conversion_value ELSE 0 END), 2) AS total_user_spend,
+  -- We count EVERY row to see how many times they actually touched the site
+  COUNT(*) AS total_interactions,
+  -- We can even see their specific purchase count alongside their visits
+  COUNTIF(event_type = 'purchase') AS total_purchases
+FROM `fluted-box-488519-p3.sql_practice.product_analyst_sql`
+GROUP BY user_id, user_tier
+ORDER BY total_user_spend DESC
+LIMIT 10;
+
+- Answers:
+
+Free users are the top spenders and there are no premium users in the top 15.
+If given the right incentive, the top 15 free users can upgrade to a premium membership.
+Maybe we can offer a free trial and/or a premium member discount as part of a thank you.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Platform Performance
+
+Compares revenue and traffic across Mobile, Tablet, and Desktop to prioritize UI updates.
+
+- SQL:
+
+SELECT
+  device_type,
+  ROUND(SAFE_DIVIDE(COUNTIF(event_type = 'purchase'), COUNT(DISTINCT session_id)) * 100, 2) as conversion_rate,
+  ROUND(SUM(session_duration_sec) / 3600, 2) AS total_hours,
+  ROUND(SUM(conversion_value), 2) as total_revenue,
+  -- This tells you which device earns the most money for every hour spent on it
+  ROUND(SAFE_DIVIDE(SUM(conversion_value), (SUM(session_duration_sec) / 3600)), 2) as revenue_per_hour
+FROM `fluted-box-488519-p3.sql_practice.product_analyst_sql`
+GROUP BY 1
+ORDER BY revenue_per_hour DESC;
+
+- Answers:
+
+The data does confirm that tablets have the highest conversion rate at 5.11. Followed by mobile at 4.83, then desktop at 4.53.
+But 60% of traffic comes from Mobile, while only 10% of traffic comes from tablets. 
